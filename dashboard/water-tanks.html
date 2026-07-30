@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Water Tanks</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="main-content">
+
+<header>
+
+<div class="header-left">
+
+<h1>🚰 Water Tanks</h1>
+
+<p>Live Tank Monitoring</p>
+
+</div>
+
+</header>
+
+<!-- Tank Information -->
+
+<div class="card tank-info-card">
+
+<h2>🏢 Tank Information</h2>
+
+<div class="tank-info-grid">
+
+<p><strong>Tank Name :</strong> Demo Water Tank</p>
+
+<p><strong>Tank ID :</strong> WT-001</p>
+
+<p><strong>Capacity :</strong> 5000 Litres</p>
+
+<p><strong>Location :</strong> College Main Overhead Tank</p>
+
+</div>
+
+</div>
+
+<!-- Status Cards -->
+
+<div class="summary-cards">
+
+<div class="summary-card">
+<h3>💧 Water Level</h3>
+<h1 id="tankWaterLevel">90%</h1>
+</div>
+
+<div class="summary-card">
+<h3>🌡 Temperature</h3>
+<h1 id="tankTemp">28°C</h1>
+</div>
+
+<div class="summary-card">
+<h3>🧪 pH</h3>
+<h1 id="tankPH">7.2</h1>
+</div>
+
+<div class="summary-card">
+<h3>💧 TDS</h3>
+<h1 id="tankTDS">180 ppm</h1>
+</div>
+
+</div>
+
+<!-- Second Row -->
+
+<div class="summary-cards">
+
+<div class="summary-card">
+<h3>🌊 Turbidity</h3>
+<h1 id="tankTurbidity">3 NTU</h1>
+</div>
+
+<div class="summary-card">
+<h3>🔋 Battery</h3>
+<h1 id="tankBattery">90%</h1>
+</div>
+
+<div class="summary-card">
+<h3>📶 Wi-Fi</h3>
+<h1 id="tankWifi">Strong</h1>
+</div>
+
+<div class="summary-card">
+<h3>🤖 AI Status</h3>
+<h1 id="tankStatus" style="color:lime;">SAFE</h1>
+</div>
+
+</div>
+
+<!-- Charts -->
+
+<div class="chart-grid">
+
+<div class="card chart-card">
+
+<h2>💧 Water Level Trend</h2>
+
+<canvas id="tankChart"></canvas>
+
+</div>
+
+<div class="card chart-card">
+
+<h2>🌡 Temperature Trend</h2>
+
+<canvas id="tempChart"></canvas>
+
+</div>
+
+</div>
+
+<!-- Bottom -->
+
+<div class="chart-grid">
+
+<div class="card">
+
+<h2>📍 Tank Location</h2>
+
+<p>College Main Overhead Tank</p>
+
+<br>
+
+<a href="https://maps.google.com" target="_blank">
+
+<button>
+
+🗺 View on Google Maps
+
+</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🤖 AI Recommendation</h2>
+
+<p>✔ Water quality is excellent.</p>
+
+<p>✔ Tank cleaning not required.</p>
+
+<p>✔ Next inspection after 24 hours.</p>
+
+</div>
+
+</div>
+
+<br>
+
+<div style="text-align:center;">
+
+<button onclick="window.location.href='index.html'">
+
+⬅ Back to Dashboard
+
+</button>
+
+</div>
+
+</div>
+
+<script type="module" src="water-tanks.js"></script>
+
+</body>
+</html>

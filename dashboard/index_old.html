@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Water Surveillance System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #eef7fb;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0077b6, #00b4d8);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 16px;
+        }
+
+        /* Main */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h2 {
+            color: #023e8a;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #64748b;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+        }
+
+        .card-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0077b6;
+        }
+
+        /* Water Level */
+        .progress-container {
+            width: 100%;
+            height: 20px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #00b4d8, #0077b6);
+            transition: width 0.5s ease;
+        }
+
+        /* Status */
+        .status {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .normal {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .warning {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .danger {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* Connection */
+        .connection {
+            margin-top: 30px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+        }
+
+        #connectionStatus {
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        .connected {
+            color: #16a34a;
+        }
+
+        .disconnected {
+            color: #dc2626;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            background: #023e8a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 22px;
+            }
+
+            .value {
+                font-size: 24px;
+            }
+
+            .container {
+                width: 94%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>💧 AI-Powered Real-Time Smart Water Surveillance System</h1>
+        <p>IoT-Based Water Quality Monitoring Dashboard</p>
+    </header>
+
+
+    <!-- Main Dashboard -->
+    <div class="container">
+
+        <div class="title">
+            <h2>Water Monitoring Dashboard</h2>
+            <p>Real-time water monitoring using Cloud Firestore</p>
+        </div>
+
+
+        <!-- Dashboard Cards -->
+        <div class="cards">
+
+            <!-- Tank Name -->
+            <div class="card">
+                <div class="card-icon">🏠</div>
+
+                <h3>Tank Name</h3>
+
+                <div class="value" id="tankName">
+                    Loading...
+                </div>
+            </div>
+
+
+            <!-- Water Level -->
+            <div class="card">
+                <div class="card-icon">💧</div>
+
+                <h3>Water Level</h3>
+
+                <div class="value" id="waterLevel">
+                    -- %
+                </div>
+
+                <div class="progress-container">
+                    <div
+                        class="progress-bar"
+                        id="waterProgress">
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Water Quality -->
+            <div class="card">
+                <div class="card-icon">🧪</div>
+
+                <h3>Water Quality</h3>
+
+                <div class="value" id="waterQuality">
+                    Loading...
+                </div>
+            </div>
+
+
+            <!-- Alert Status -->
+            <div class="card">
+                <div class="card-icon">🚨</div>
+
+                <h3>Alert Status</h3>
+
+                <div
+                    class="status normal"
+                    id="alertStatus">
+                    Loading...
+                </div>
+            </div>
+
+
+            <!-- Last Updated -->
+            <div class="card">
+                <div class="card-icon">🕒</div>
+
+                <h3>Last Updated</h3>
+
+                <div
+                    class="value"
+                    id="lastUpdated">
+                    Loading...
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Firebase Connection -->
+        <div class="connection">
+
+            <h2>System Connection</h2>
+
+            <p id="connectionStatus" class="disconnected">
+                🔴 Firebase Not Connected
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>AI-Powered Real-Time Smart Water Surveillance System</p>
+        <p>Department of Artificial Intelligence and Data Science</p>
+    </footer>
+
+
+    <!-- Firebase + Firestore -->
+    <script type="module">
+
+import { initializeApp } from "...firebase-app.js";
+
+import {
+  getFirestore,
+  doc,
+  onSnapshot
+} from "...firebase-firestore.js";
+
+const firebaseConfig = {
+   ...
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const tankDocument = doc(...);
+
+// remaining code...
+</script>
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+        /*
+        =====================================================
+        FIRESTORE DOCUMENT
+        =====================================================
+
+        Collection:
+        water_tanks
+
+        Document:
+        demo_tank_001
+        =====================================================
+        */
+
+        const tankDocument = doc(
+            db,
+            "water_tanks",
+            "demo_tank_001"
+        );
+
+
+        /*
+        =====================================================
+        REAL-TIME FIRESTORE LISTENER
+        =====================================================
+        */
+
+        onSnapshot(
+            tankDocument,
+
+            (snapshot) => {
+
+                if (snapshot.exists()) {
+
+                    const data = snapshot.data();
+
+                    console.log(
+                        "Firebase Data:",
+                        data
+                    );
+
+
+                    /*
+                    -------------------------------
+                    TANK NAME
+                    -------------------------------
+                    */
+
+                    document.getElementById(
+                        "tankName"
+                    ).innerText =
+                        data.tank_name || "Not Available";
+
+
+                    /*
+                    -------------------------------
+                    WATER LEVEL
+                    -------------------------------
+                    */
+
+                    const waterLevel =
+                        Number(
+                            data.water_level || 0
+                        );
+
+
+                    document.getElementById(
+                        "waterLevel"
+                    ).innerText =
+                        waterLevel + "%";
+
+
+                    document.getElementById(
+                        "waterProgress"
+                    ).style.width =
+                        Math.min(
+                            Math.max(
+                                waterLevel,
+                                0
+                            ),
+                            100
+                        ) + "%";
+
+
+                    /*
+                    -------------------------------
+                    WATER QUALITY
+                    -------------------------------
+                    */
+
+                    document.getElementById(
+                        "waterQuality"
+                    ).innerText =
+                        data.water_quality ||
+                        "Not Available";
+
+
+                    /*
+                    -------------------------------
+                    ALERT STATUS
+                    -------------------------------
+                    */
+
+                    const alertStatus =
+                        data.alert_status ||
+                        "Unknown";
+
+
+                    const alertElement =
+                        document.getElementById(
+                            "alertStatus"
+                        );
+
+
+                    alertElement.innerText =
+                        alertStatus;
+
+
+                    /*
+                    Change status color
+                    */
+
+                    alertElement.className =
+                        "status";
+
+
+                    if (
+                        alertStatus.toLowerCase()
+                        === "normal"
+                    ) {
+
+                        alertElement.classList.add(
+                            "normal"
+                        );
+
+                    }
+
+                    else if (
+                        alertStatus.toLowerCase()
+                        === "warning"
+                    ) {
+
+                        alertElement.classList.add(
+                            "warning"
+                        );
+
+                    }
+
+                    else {
+
+                        alertElement.classList.add(
+                            "danger"
+                        );
+
+                    }
+
+
+                    /*
+                    -------------------------------
+                    LAST UPDATED
+                    -------------------------------
+                    */
+
+                    let updatedTime =
+                        data.last_updated;
+
+
+                    if (
+                        updatedTime &&
+                        typeof updatedTime.toDate
+                        === "function"
+                    ) {
+
+                        updatedTime =
+                            updatedTime.toDate()
+                            .toLocaleString();
+
+                    }
+
+
+                    document.getElementById(
+                        "lastUpdated"
+                    ).innerText =
+                        updatedTime ||
+                        "Not Available";
+
+
+                    /*
+                    -------------------------------
+                    CONNECTION STATUS
+                    -------------------------------
+                    */
+
+                    const connection =
+                        document.getElementById(
+                            "connectionStatus"
+                        );
+
+
+                    connection.innerText =
+                        "🟢 Firebase Connected";
+
+
+                    connection.className =
+                        "connected";
+
+                }
+
+                else {
+
+                    console.log(
+                        "Document does not exist"
+                    );
+
+
+                    document.getElementById(
+                        "connectionStatus"
+                    ).innerText =
+                        "🔴 Document Not Found";
+
+
+                    document.getElementById(
+                        "connectionStatus"
+                    ).className =
+                        "disconnected";
+
+                }
+
+            },
+
+
+            /*
+            =================================================
+            ERROR HANDLING
+            =================================================
+            */
+
+            (error) => {
+
+                console.error(
+                    "Firebase Error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "connectionStatus"
+                ).innerText =
+                    "🔴 Firebase Connection Error";
+
+
+                document.getElementById(
+                    "connectionStatus"
+                ).className =
+                    "disconnected";
+
+            }
+
+        );
+
+    </script>
+
+</body>
+</html>

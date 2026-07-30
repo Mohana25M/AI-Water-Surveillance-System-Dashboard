@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | AI Water Surveillance</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<header class="admin-header">
+
+    <div class="logo">
+        🚰 AI Water Surveillance
+    </div>
+
+    <div class="header-right">
+
+        <div class="admin-user">
+            <i class="fa-solid fa-user-shield"></i>
+            Administrator
+        </div>
+
+        <div class="notification">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge">3</span>
+        </div>
+
+        <button class="logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="dashboard">
+
+    <!-- LEFT PANEL -->
+
+    <div class="left-panel">
+
+        <div class="glass-card stats">
+
+            <h3>📊 Dashboard</h3>
+
+            <div class="stat-box">
+
+                <h2 id="tankCount">0</h2>
+
+                <p>Total Tanks</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h2>98%</h2>
+
+                <p>Healthy Tanks</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h2>24/7</h2>
+
+                <p>Monitoring</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right-panel">
+
+        <div class="glass-card">
+
+            <h2>Add New Tank</h2>
+
+            <input
+                type="text"
+                id="tankName"
+                placeholder="Tank Name">
+
+            <input
+                type="text"
+                id="location"
+                placeholder="Location">
+
+            <input
+                type="number"
+                id="capacity"
+                placeholder="Capacity (Litres)">
+
+            <button id="saveBtn">
+
+                ➕ Save Tank
+
+            </button>
+
+        </div>
+
+        <div class="glass-card">
+
+            <h2>Tank List</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Tank</th>
+                        <th>Location</th>
+                        <th>Capacity</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tankTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
+

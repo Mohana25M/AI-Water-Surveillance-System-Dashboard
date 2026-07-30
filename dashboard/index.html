@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Water Surveillance System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="sidebar">
+
+    <div class="logo">
+        💧
+        <h2>AI Water</h2>
+    </div>
+
+    <ul>
+
+       <li>
+    <a href="index.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+</li>
+
+<li>
+    <a href="water-tanks.html">
+        <i class="fa-solid fa-water"></i>
+        Water Tanks
+    </a>
+</li>
+
+<li>
+    <a href="analytics.html">
+        <i class="fa-solid fa-chart-line"></i>
+        Analytics
+    </a>
+</li>
+<li>
+    <a href="reports.html">
+        <i class="fa-solid fa-file"></i>
+        Reports
+    </a>
+</li>
+
+<li>
+    <a href="settings.html">
+        <i class="fa-solid fa-gear"></i>
+        Settings
+    </a>
+</li>
+
+        <li onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </li>
+
+    </ul>
+
+</div>
+
+<div class="main-content">
+
+<header>
+
+    <div class="header-left">
+        <h1>💧 AI-Powered Smart Water Surveillance System</h1>
+        <p>Overhead Water Tank Monitoring Dashboard</p>
+    </div>
+
+    <div class="header-right">
+
+        <span class="live-badge">🟢 LIVE</span>
+
+        <p id="clock"></p>
+
+    </div>
+
+</header>
+
+
+<div class="card tank-info-card">
+
+    <h2>🏢 Tank Information</h2>
+
+    <div class="tank-info-grid">
+
+        <p><strong>Tank Name :</strong> <span id="tankNameInfo">Loading...</span></p>
+
+        <p><strong>Location :</strong> <span id="tankLocationInfo">Loading...</span></p>
+
+        <p><strong>Device ID :</strong> <span id="deviceId">WT-001</span></p>
+
+        <p><strong>Capacity :</strong> <span id="tankCapacity">5000 Litres</span></p>
+
+    </div>
+
+</div>
+
+<div class="summary-cards">
+
+    <div class="summary-card">
+        <h3>💧 Water Health</h3>
+        <h1 id="summaryHealth">100%</h1>
+    </div>
+
+    <div class="summary-card">
+        <h3>🤖 AI Prediction</h3>
+        <h1 id="summaryPrediction">SAFE</h1>
+    </div>
+
+    <div class="summary-card">
+        <h3>📶 Device</h3>
+        <h1 id="summaryDevice">ONLINE</h1>
+    </div>
+
+    <div class="summary-card">
+        <h3>🔋 Battery</h3>
+        <h1 id="summaryBattery">100%</h1>
+    </div>
+
+</div>
+
+
+
+    <div style="text-align:right; margin:20px;">
+    <button onclick="logout()">
+        🚪 Logout
+    </button>
+</div>
+
+    <main class="container">
+
+        <h2>Water Monitoring Dashboard</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <i class="fa-solid fa-house"></i>
+                <h3>Tank Name</h3>
+                <div id="tankNameCard" class="value">Loading...</div>
+            </div>
+
+<div class="card">
+    <i class="fa-solid fa-droplet"></i>
+    <h3>Water Level</h3>
+
+    <div id="waterLevel" class="value">90%</div>
+
+
+
+                <div class="progress">
+                    <div id="waterProgress" class="progress-fill"></div>
+                </div>
+            </div>
+            <div class="card">
+    <i class="fa-solid fa-temperature-half"></i>
+    <h3>Temperature</h3>
+    <div id="temperature" class="value">28 °C</div>
+</div>
+
+<div class="card">
+    <i class="fa-solid fa-vial"></i>
+    <h3>pH Value</h3>
+    <div id="phValue" class="value">7.2</div>
+</div>
+
+<div class="card">
+    <i class="fa-solid fa-droplet"></i>
+    <h3>TDS</h3>
+    <div id="tdsValue" class="value">180 ppm</div>
+</div>
+
+<div class="card">
+    <i class="fa-solid fa-water"></i>
+    <h3>Turbidity</h3>
+    <div id="turbidity" class="value">3 NTU</div>
+</div>
+<div class="card">
+    <i class="fa-solid fa-battery-three-quarters"></i>
+    <h3>Battery</h3>
+    <div id="batteryLevel" class="value">Loading...</div>
+</div>
+<div class="card">
+    <i class="fa-solid fa-location-dot"></i>
+    <h3>Tank Location</h3>
+    <div id="tankLocation" class="value">Loading...</div>
+</div>
+<div class="card">
+    <i class="fa-solid fa-microchip"></i>
+    <h3>Device Status</h3>
+    <div id="deviceStatus" class="value">Loading...</div>
+</div>
+<div class="card">
+    <i class="fa-solid fa-solar-panel"></i>
+    <h3>Solar Status</h3>
+    <div id="solarStatus" class="value">Loading...</div>
+</div>
+<div class="card">
+    <i class="fa-solid fa-wifi"></i>
+    <h3>Wi-Fi Signal</h3>
+    <div id="wifiSignal" class="value">Loading...</div>
+</div>
+<div class="card">
+    <i class="fa-solid fa-heart-pulse"></i>
+    <h3>Water Health Score</h3>
+    <div id="healthScore" class="value">Loading...</div>
+    <small id="healthStatus">Calculating...</small>
+</div>
+<div class="card">
+    <i class="fa-solid fa-heart-circle-exclamation"></i>
+    <h3>Disease Risk</h3>
+    <div id="diseaseRisk" class="value">Checking...</div>
+</div>
+            <div class="card">
+                <i class="fa-solid fa-clock"></i>
+                <h3>Last Updated</h3>
+                <div id="lastUpdated" class="value">Loading...</div>
+            </div>
+
+        
+     </div>
+
+<div class="card chart-card">
+    <h2>Water Level History</h2>
+    <canvas id="waterLevelChart"></canvas>
+</div>
+<div class="chart-grid">
+
+    <div class="card chart-card">
+        <h2>🌡 Temperature Trend</h2>
+        <canvas id="temperatureChart"></canvas>
+    </div>
+
+    <div class="card chart-card">
+        <h2>🧪 pH Trend</h2>
+        <canvas id="phChart"></canvas>
+    </div>
+
+</div>
+<div class="summary-panel">
+
+    <div class="summary-box">
+        <h3>💧 Water Health Score</h3>
+        <h1 id="summaryHealth">92%</h1>
+        <p>Excellent</p>
+    </div>
+
+    <div class="summary-box">
+        <h3>🤖 AI Prediction</h3>
+        <h1 id="summaryPrediction">SAFE</h1>
+        <p>Water Safe for Drinking</p>
+    </div>
+
+    <div class="summary-box">
+        <h3>❤️ Disease Risk</h3>
+       <h1 id="summaryDiseaseRisk">LOW</h1>
+        <p>No Waterborne Disease</p>
+    </div>
+
+</div>
+<div class="card">
+
+    <h2>📄 Water Quality Report</h2>
+
+    <button id="downloadReport">
+        📥 Download PDF Report
+    </button>
+
+</div>
+
+
+<div class="bottom-cards">
+
+    <div class="card">
+        <h2>💧 Water Quality Status</h2>
+
+        <h1 id="waterStatus">EXCELLENT</h1>
+
+        <p id="statusMessage">
+            Water quality is safe.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>⚙️ System Status</h2>
+
+        <p id="connectionStatus">
+            🟢 Firebase Connected
+        </p>
+
+        <hr>
+
+        <p>Cloud : 🟢 Online</p>
+        <p>Database : 🟢 Active</p>
+        <p>AI Engine : 🟢 Ready</p>
+    </div>
+
+    <div class="card camera-card">
+        <h2>📷 ESP32 Live Camera</h2>
+
+        <span class="live-tag">🔴 LIVE</span>
+
+        <img
+            id="cameraFeed"
+            src="../images/camera_placeholder.jpg"
+            alt="ESP32 Camera Feed">
+    </div>
+
+    <div class="card">
+        <h2>🤖 AI Water Quality Prediction</h2>
+
+        <div class="prediction-box">
+            <h2 id="predictionResult">SAFE ✅</h2>
+
+            <p id="predictionAccuracy">
+                Prediction Accuracy : 96%
+            </p>
+
+            <p id="predictionMessage">
+                Water quality is safe for drinking.
+            </p>
+
+            <button id="predictBtn">
+                Run AI Prediction
+            </button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🚨 Smart Alerts</h2>
+
+        <p id="alertMessage" class="alert-text">
+            ✅ All Parameters Normal
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🤖 AI Recommendation</h3>
+
+        <div id="aiRecommendation" class="recommendation-box">
+            Analyzing water quality...
+        </div>
+    </div>
+<div class="last-row">
+
+    <div class="card small-card">
+
+        <h3>📍 Tank Location</h3>
+
+        <p id="tankLocationText">Loading...</p>
+
+        <br>
+
+        <a id="mapLink" href="#" target="_blank">
+            🗺 View on Google Maps
+        </a>
+
+    </div>
+
+    <div class="card small-card">
+
+        <h2>💧 Water Health Score</h2>
+
+        <div class="health-circle">
+            <span id="healthCircleScore">92%</span>
+        </div>
+
+        <p class="health-text">
+            Excellent Water Quality
+        </p>
+
+    </div>
+
+</div>
+</main>
+
+        <footer>
+        <p>Department of Artificial Intelligence and Data Science</p>
+        <p>Final Year Project</p>
+    </footer>
+
+    <!-- Main Dashboard Script -->
+    <script type="module" src="script.js"></script>
+
+    <!-- Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- jsPDF Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- Main Script -->
+ </div>
+
+
+
+<!-- Charts Script -->
+<script type="module" src="charts.js"></script>
+<script src="settings.js"></script>
+
+<script src="index.js"></script>
+</body>
+</html>
